@@ -1,6 +1,6 @@
 name:                hw1-haskell
 version:             0.1.0.0
-synopsis:            Starter code for cse130 homework/00-haskell
+synopsis:            Starter code for cse114A homework/00-haskell
 license:             MIT
 license-file:        LICENSE
 author:              Ranjit Jhala
