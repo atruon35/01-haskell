@@ -11,6 +11,8 @@
 
  -}
 
+{- HLINT ignore -}
+
 module Hw1 where
 
 import Prelude  hiding (replicate, sum, reverse)
