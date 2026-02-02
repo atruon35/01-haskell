@@ -31,7 +31,9 @@ import Prelude  hiding (replicate, sum, reverse)
 -- []
 
 listReverse :: [a] -> [a]
-listReverse xs = error "TBD:listReverse"
+listReverse [] = []
+listReverse (x:xs) = listReverse xs ++ [x]
+--listReverse xs = error "TBD:listReverse"
 
 
 -- | Determine whether a string is a palindrome (i.e. spelled the same
@@ -47,7 +49,8 @@ listReverse xs = error "TBD:listReverse"
 -- True
 
 palindrome :: String -> Bool
-palindrome w = error "TBD:palindrome"
+palindrome w = w == listReverse w
+--palindrome w = error "TBD:palindrome"
 
 
 -- | `digitsOfInt n` should return `[]` if `n` is not positive,
@@ -64,7 +67,10 @@ palindrome w = error "TBD:palindrome"
 -- []
 
 digitsOfInt :: Integer -> [Integer]
-digitsOfInt n = error "TBD:digitsOfInt"
+digitsOfInt n 
+  | n <= 0 = []
+  | otherwise = digitsOfInt (n `div` 10) ++ [n `mod` 10]
+--digitsOfInt n = error "TBD:digitsOfInt"
 
 
 -- | `digitsOfInts xs` should return a list containing all of the digits
@@ -77,7 +83,9 @@ digitsOfInt n = error "TBD:digitsOfInt"
 -- []
 
 digitsOfInts :: [Integer] -> [Integer]
-digitsOfInts xs = error "TBD:digitsOfInts"
+digitsOfInts [] = []
+digitsOfInts (x:xs) = digitsOfInt x ++ digitsOfInts xs
+--digitsOfInts xs = error "TBD:digitsOfInts"
 
 
 -- | Doubles every other integer in a list,
@@ -93,7 +101,10 @@ digitsOfInts xs = error "TBD:digitsOfInts"
 -- []
 
 doubleEveryOther :: [Integer] -> [Integer]
-doubleEveryOther xs = error "TBD:doubleEveryOther"
+doubleEveryOther [] = []     
+doubleEveryOther [x] = [x]  
+doubleEveryOther (x:y:zs) = x : (y * 2) : doubleEveryOther zs
+--doubleEveryOther xs = error "TBD:doubleEveryOther"
 
 
 -- | Sum the elements of a list
@@ -108,7 +119,9 @@ doubleEveryOther xs = error "TBD:doubleEveryOther"
 -- 36
 
 sumList :: [Integer] -> Integer
-sumList xs = error "TBD:sumList"
+sumList [] = 0
+sumList (x:xs) = x + sumList xs
+--sumList xs = error "TBD:sumList"
 
 
 -- | Validate a credit card number
@@ -120,4 +133,5 @@ sumList xs = error "TBD:sumList"
 -- False
 
 validateCardNumber :: Integer -> Bool
-validateCardNumber = error "TBD:validateCardNumber"
+validateCardNumber n = sumList (digitsOfInts (doubleEveryOther (listReverse (digitsOfInt n)))) `mod` 10 == 0
+--validateCardNumber = error "TBD:validateCardNumber"
